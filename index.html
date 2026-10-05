@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FoodWise is a digital household food-waste reduction platform for meal planning, expiry tracking, surplus sharing and responsible disposal.">
+  <title>FoodWise | Reduce Food Waste at Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="toast" id="toast" role="status"></div>
+
+  <header class="header" id="home">
+    <nav class="nav container">
+      <a class="brand" href="#home"><span class="brand-mark">🍃</span><span>Food<span>Wise</span></span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#planner">Meal Planner</a>
+        <a href="#expiry">Expiry Tracker</a>
+        <a href="#share">Share Food</a>
+        <a href="#learn">Learn</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">☾</button>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+        <button class="btn btn-primary" onclick="openModal('wasteModal')">Log Waste</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">SMART HOUSEHOLD FOOD MANAGEMENT</div>
+          <h1>Plan better.<br><em>Waste less.</em><br>Share more.</h1>
+          <p class="hero-text">FoodWise helps households turn everyday food habits into simple, measurable actions. Plan meals, track expiry dates, manage leftovers and give surplus food a second chance.</p>
+          <div class="hero-buttons">
+            <a href="#dashboard" class="btn btn-primary btn-lg">Open Dashboard <span>→</span></a>
+            <a href="#planner" class="btn btn-outline btn-lg">Plan This Week</a>
+          </div>
+          <div class="hero-note"><span>✓</span> Free to use &nbsp; <span>✓</span> Works in your browser &nbsp; <span>✓</span> Privacy-friendly local storage</div>
+        </div>
+        <div class="hero-art">
+          <div class="leaf leaf-1">🌿</div>
+          <div class="leaf leaf-2">🍃</div>
+          <div class="plate-card">
+            <div class="plate-top">
+              <span>Today's Kitchen</span>
+              <span class="live-dot">● Live</span>
+            </div>
+            <div class="plate">
+              <div class="plate-inner">
+                <span class="food food-1">🥦</span><span class="food food-2">🥕</span>
+                <span class="food food-3">🍅</span><span class="food food-4">🥔</span>
+                <span class="food food-5">🌽</span>
+              </div>
+            </div>
+            <div class="plate-bottom">
+              <div><strong id="heroSaved">2.4</strong><small>kg saved this month</small></div>
+              <div class="mini-score"><span>Eco score</span><strong id="heroScore">82</strong></div>
+            </div>
+          </div>
+          <div class="floating-card float-one"><span>🥗</span><div><b>Meal planned</b><small>Tonight • 7:30 PM</small></div></div>
+          <div class="floating-card float-two"><span>⏰</span><div><b>2 items expiring</b><small>Use them soon</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-strip">
+      <div class="container stats">
+        <div><strong id="statSaved">0.0</strong><span>kg food saved</span></div>
+        <div><strong id="statMeals">0</strong><span>meals planned</span></div>
+        <div><strong id="statShared">0</strong><span>surplus items shared</span></div>
+        <div><strong id="statWaste">0.0</strong><span>kg waste logged</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="dashboard">
+      <div class="container">
+        <div class="section-head">
+          <div><span class="section-kicker">YOUR IMPACT</span><h2>A small habit can make a <em>big difference.</em></h2></div>
+          <button class="text-btn" onclick="resetData()">Reset demo data ↻</button>
+        </div>
+        <div class="dashboard-grid">
+          <div class="impact-card main-impact">
+            <div class="impact-header"><div><span class="muted">MONTHLY FOOD SAVED</span><h3><span id="dashSaved">0.0</span> kg</h3></div><div class="impact-icon">🌱</div></div>
+            <div class="progress-wrap"><div class="progress-label"><span>Progress to your 10 kg goal</span><b id="goalPct">0%</b></div><div class="progress"><span id="goalBar"></span></div></div>
+            <div class="impact-footer"><span>🌍 Less waste means less pressure on land, water and energy.</span></div>
+          </div>
+          <div class="impact-card score-card">
+            <span class="muted">HOUSEHOLD ECO SCORE</span>
+            <div class="score-ring"><div><strong id="score">82</strong><small>/100</small></div></div>
+            <p>Great start! Keep your meal plans and expiry checks consistent.</p>
+          </div>
+          <div class="impact-card action-card">
+            <span class="muted">QUICK ACTIONS</span>
+            <button onclick="openModal('itemModal')">＋ Add food item <span>→</span></button>
+            <button onclick="openModal('wasteModal')">＋ Log food waste <span>→</span></button>
+            <button onclick="scrollToSection('share')">♡ Share surplus food <span>→</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft-bg" id="planner">
+      <div class="container">
+        <div class="section-head">
+          <div><span class="section-kicker">SMART PLANNING</span><h2>Your week, <em>planned simply.</em></h2></div>
+          <button class="btn btn-dark" onclick="openModal('mealModal')">＋ Add meal</button>
+        </div>
+        <div class="planner-grid" id="plannerGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="expiry">
+      <div class="container">
+        <div class="section-head">
+          <div><span class="section-kicker">EXPIRY TRACKER</span><h2>Use it before <em>you lose it.</em></h2></div>
+          <button class="btn btn-primary" onclick="openModal('itemModal')">＋ Add food</button>
+        </div>
+        <div class="expiry-layout">
+          <div class="expiry-list" id="expiryList"></div>
+          <aside class="tip-card">
+            <div class="tip-icon">💡</div>
+            <span class="section-kicker">STORAGE TIP</span>
+            <h3>First in, first out.</h3>
+            <p>Keep older food visible and place newer purchases behind it. This simple routine makes expiry tracking easier.</p>
+            <div class="tip-line"><span>01</span> Check your fridge twice a week.</div>
+            <div class="tip-line"><span>02</span> Label leftovers with the date.</div>
+            <div class="tip-line"><span>03</span> Freeze food you won't use soon.</div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft-bg" id="share">
+      <div class="container share-grid">
+        <div>
+          <span class="section-kicker">SURPLUS FOOD</span>
+          <h2>Good food deserves <em>a second chance.</em></h2>
+          <p class="lead">When food is still safe to eat but your household won't use it, consider sharing it with someone who can.</p>
+          <div class="share-steps">
+            <div><b>1</b><span><strong>Check safety</strong> Only share food that is safe, fresh and properly stored.</span></div>
+            <div><b>2</b><span><strong>List surplus</strong> Add what you have, quantity and pickup information.</span></div>
+            <div><b>3</b><span><strong>Connect locally</strong> Coordinate with a trusted person or registered food-distribution organisation.</span></div>
+          </div>
+          <button class="btn btn-primary" onclick="openModal('shareModal')">＋ List surplus food</button>
+        </div>
+        <div class="share-board">
+          <div class="board-head"><span>COMMUNITY BOARD</span><span class="board-live">● DEMO</span></div>
+          <div id="shareList"></div>
+          <div class="board-footer">For a real deployment, connect this feature to verified local organisations and food-safety workflows.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="learn">
+      <div class="container">
+        <div class="section-head center">
+          <div><span class="section-kicker">LEARN & ACT</span><h2>Better habits start with <em>better information.</em></h2></div>
+        </div>
+        <div class="learn-grid">
+          <article class="learn-card"><span class="learn-icon">🛒</span><span class="number">01</span><h3>Plan before shopping</h3><p>Check your fridge and make a realistic list based on meals you actually expect to cook.</p><button onclick="showToast('Tip saved: check your fridge before shopping!')">Save tip ♡</button></article>
+          <article class="learn-card"><span class="learn-icon">📅</span><span class="number">02</span><h3>Track expiry dates</h3><p>Keep food visible, label leftovers and use items that need attention first.</p><button onclick="showToast('Tip saved: use older items first!')">Save tip ♡</button></article>
+          <article class="learn-card"><span class="learn-icon">🍲</span><span class="number">03</span><h3>Love your leftovers</h3><p>Turn extra portions into tomorrow's lunch, a new recipe or a freezer-ready meal.</p><button onclick="showToast('Tip saved: give leftovers a second meal!')">Save tip ♡</button></article>
+          <article class="learn-card"><span class="learn-icon">♻️</span><span class="number">04</span><h3>Dispose responsibly</h3><p>Separate unavoidable food scraps and follow your local composting or organic-waste system.</p><button onclick="showToast('Tip saved: separate food scraps responsibly!')">Save tip ♡</button></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section research-section">
+      <div class="container research-box">
+        <div><span class="section-kicker">WHY THIS MATTERS</span><h2>Household action is <em>part of the solution.</em></h2><p>India's estimated household food waste is 55 kg per person per year, according to the UNEP Food Waste Index 2024 as cited by the Government of India. Digital tools can support better planning, storage, sharing and awareness.</p></div>
+        <div class="research-stat"><strong>55</strong><span>kg / person / year<br>estimated household food waste in India</span><small>Government of India • 2025 parliamentary answer</small></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><a class="brand" href="#home"><span class="brand-mark">🍃</span><span>Food<span>Wise</span></span></a><p>A student-friendly digital concept for reducing household food waste through practical everyday tools.</p></div>
+      <div><h4>Platform</h4><a href="#dashboard">Dashboard</a><a href="#planner">Meal Planner</a><a href="#expiry">Expiry Tracker</a><a href="#share">Share Food</a></div>
+      <div><h4>Project</h4><a href="#learn">Learn</a><a href="#home">About the idea</a><a href="#home">Privacy</a><a href="#home">Contact</a></div>
+    </div>
+    <div class="container footer-bottom"><span>© 2026 FoodWise. Academic project concept.</span><span>Designed for responsible food habits.</span></div>
+  </footer>
+
+  <!-- Modals -->
+  <div class="modal-backdrop" id="itemModal"><div class="modal"><button class="modal-close" onclick="closeModal('itemModal')">×</button><h3>Add food item</h3><p>Track food so you can use it before it expires.</p><form id="itemForm"><label>Food name<input required name="name" placeholder="e.g. Tomatoes"></label><label>Category<select name="category"><option>Vegetables</option><option>Fruit</option><option>Dairy</option><option>Cooked food</option><option>Grains</option><option>Other</option></select></label><label>Quantity<input required name="qty" placeholder="e.g. 500 g"></label><label>Expiry date<input required type="date" name="expiry"></label><button class="btn btn-primary full" type="submit">Add to tracker</button></form></div></div>
+
+  <div class="modal-backdrop" id="mealModal"><div class="modal"><button class="modal-close" onclick="closeModal('mealModal')">×</button><h3>Add meal</h3><p>Build a realistic weekly meal plan.</p><form id="mealForm"><label>Day<select name="day"><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option></select></label><label>Meal type<select name="type"><option>Breakfast</option><option>Lunch</option><option>Dinner</option></select></label><label>Meal name<input required name="meal" placeholder="e.g. Vegetable pulao"></label><button class="btn btn-dark full" type="submit">Add meal</button></form></div></div>
+
+  <div class="modal-backdrop" id="wasteModal"><div class="modal"><button class="modal-close" onclick="closeModal('wasteModal')">×</button><h3>Log food waste</h3><p>Tracking waste helps you identify patterns and improve.</p><form id="wasteForm"><label>Food category<select name="category"><option>Cooked food</option><option>Fruit</option><option>Vegetables</option><option>Dairy</option><option>Grains</option><option>Other</option></select></label><label>Amount (kg)<input required min="0.01" step="0.01" type="number" name="amount" placeholder="0.25"></label><label>Reason<select name="reason"><option>Overcooked</option><option>Expired</option><option>Leftover</option><option>Spoiled</option><option>Other</option></select></label><button class="btn btn-primary full" type="submit">Log waste</button></form></div></div>
+
+  <div class="modal-backdrop" id="shareModal"><div class="modal"><button class="modal-close" onclick="closeModal('shareModal')">×</button><h3>List surplus food</h3><p>Only list food that is safe and suitable for sharing.</p><form id="shareForm"><label>Food name<input required name="name" placeholder="e.g. Fresh rotis"></label><label>Quantity<input required name="qty" placeholder="e.g. 10 pieces"></label><label>Area / pickup note<input required name="area" placeholder="e.g. Near community centre"></label><button class="btn btn-primary full" type="submit">List surplus</button></form></div></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
